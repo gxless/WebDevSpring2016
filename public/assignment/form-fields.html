@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <title>Form Fields</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/dashboard.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="home.html">Form Maker</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="register.html">Register</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li><a href="#">Username</a></li>
+                <li><a href="#">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-sidebar">
+                <li><a href="home.html">Home <span class="sr-only">(current)</span></a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="admin.html">Admin</a></li>
+                <li class="active"><a href="forms.html">Forms</a></li>
+            </ul>
+        </div>
+
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <h1 class="page-header">Forms: Registration Form</h1>
+            <ul class="nav nav-tabs">
+                <li><a href="forms.html">Forms</a></li>
+                <li class="active"><a href="form-fields.html">Fields</a></li>
+            </ul>
+            <div class="table-responsive">
+                <table id="tableGrid" class="table table-striped">
+                    <tbody>
+                    <tr>
+                        <td>
+                            <label for="inputFirstname" class="control-label">First Name:</label>
+                            <input type="text" class="form-control" id="inputFirstname" placeholder="First Name">
+                        </td>
+                        <td>
+                            <button type="button" class="editIcon icon-pencil"><span class="glyphicon glyphicon-pencil"></span></button>
+                            <button type="button" class="editIcon icon-plus"><span class="glyphicon glyphicon-plus"></span></button>
+                            <button type="button" class="editIcon icon-remove"><span class="glyphicon glyphicon-remove"></span></button>
+                            <button type="button" class="editIcon icon-justify"><span class="glyphicon glyphicon-align-justify"></span></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="inputLasttname" class="control-label">Last Name:</label>
+                            <input type="text" class="form-control" id="inputLasttname" placeholder="Last Name">
+                        </td>
+                        <td>
+                            <button type="button" class="editIcon icon-pencil"><span class="glyphicon glyphicon-pencil"></span></button>
+                            <button type="button" class="editIcon icon-plus"><span class="glyphicon glyphicon-plus"></span></button>
+                            <button type="button" class="editIcon icon-remove"><span class="glyphicon glyphicon-remove"></span></button>
+                            <button type="button" class="editIcon icon-justify"><span class="glyphicon glyphicon-align-justify"></span></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="inputDOB" class="control-label">Date of Birth:</label>
+                            <div class="dropdown" id="inputDOB">
+                                <button class="btn btn-primary dropdown-toggle dropdownBtn" type="button" data-toggle="dropdown">Select Date
+                                    <span class="caret"></span></button>
+                                <ul class="dropdown-menu">
+                                    <li>Date 1</li>
+                                    <li>Date 2</li>
+                                    <li>Date 3</li>
+                                </ul>
+                            </div>
+                        </td>
+                        <td>
+                            <button type="button" class="editIcon icon-pencil"><span class="glyphicon glyphicon-pencil"></span></button>
+                            <button type="button" class="editIcon icon-plus"><span class="glyphicon glyphicon-plus"></span></button>
+                            <button type="button" class="editIcon icon-remove"><span class="glyphicon glyphicon-remove"></span></button>
+                            <button type="button" class="editIcon icon-justify"><span class="glyphicon glyphicon-align-justify"></span></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="inputGender" class="control-label">Gender:</label>
+
+
+                            <div class="btn-group" id="inputGender">
+                                <button data-toggle="dropdown" class="btn dropdown-toggle"  data-placeholder="Please select">Checked option <span class="caret"></span></button>
+                                <ul class="dropdown-menu">
+                                    <li><input type="radio" id="ID"><label for="ID" name="NAME" value="VALUE">Male</label></li>
+                                    <li><input type="radio" id="ID2"><label for="ID2" name="NAME" value="VALUE">Female</label></li>
+                                </ul>
+                            </div>
+
+                        </td>
+                        <td>
+                            <button type="button" class="editIcon icon-pencil"><span class="glyphicon glyphicon-pencil"></span></button>
+                            <button type="button" class="editIcon icon-plus"><span class="glyphicon glyphicon-plus"></span></button>
+                            <button type="button" class="editIcon icon-remove"><span class="glyphicon glyphicon-remove"></span></button>
+                            <button type="button" class="editIcon icon-justify"><span class="glyphicon glyphicon-align-justify"></span></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="inputRoles" class="control-label">Roles:</label>
+                            <div class="checkbox" id="inputRoles">
+                                <label>
+                                    <input type="checkbox" value="admin"> Admin
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" value="student"> Student
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" value="user"> User
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <button type="button" class="editIcon icon-pencil"><span class="glyphicon glyphicon-pencil"></span></button>
+                            <button type="button" class="editIcon icon-plus"><span class="glyphicon glyphicon-plus"></span></button>
+                            <button type="button" class="editIcon icon-remove"><span class="glyphicon glyphicon-remove"></span></button>
+                            <button type="button" class="editIcon icon-justify"><span class="glyphicon glyphicon-align-justify"></span></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="inputGender" class="control-label">License Agreement:</label>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="optionsRadios" id="optionsRadiosYes" value="yes"> Yes
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="optionsRadios" id="optionsRadiosNo" value="no"> No
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <button type="button" class="editIcon icon-pencil"><span class="glyphicon glyphicon-pencil"></span></button>
+                            <button type="button" class="editIcon icon-plus"><span class="glyphicon glyphicon-plus"></span></button>
+                            <button type="button" class="editIcon icon-remove"><span class="glyphicon glyphicon-remove"></span></button>
+                            <button type="button" class="editIcon icon-justify"><span class="glyphicon glyphicon-align-justify"></span></button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <label for="inputDOB" class="control-label">Add New Field:</label>
+                            <div class="dropdown" id="inputAddField">
+                                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Single Line Text
+                                    <span class="caret"></span></button>
+                                <ul class="dropdown-menu">
+                                    <li>field 1</li>
+                                    <li>field 2</li>
+                                </ul>
+                            </div>
+                        </td>
+                        <td>
+                            <button type="button" class="editIcon icon-plus"><span class="glyphicon glyphicon-plus"></span></button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+</body>
+</html>
+
+>
