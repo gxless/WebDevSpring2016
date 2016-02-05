@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-    <title>Form Fields</title>
+    <title>Login</title>
 
     <!-- Bootstrap core CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
@@ -60,8 +60,14 @@
             </ul>
             <div class="table-responsive">
                 <table id="tableGrid" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Form Fields Edit</th>
+                            <th> </th>
+                        </tr>
+                    </thead>
                     <tbody>
-                    <tr>
+                    <tr id="pp">
                         <td>
                             <label for="inputFirstname" class="control-label">First Name:</label>
                             <input type="text" class="form-control" id="inputFirstname" placeholder="First Name">
@@ -88,14 +94,11 @@
                     <tr>
                         <td>
                             <label for="inputDOB" class="control-label">Date of Birth:</label>
-                            <div class="dropdown" id="inputDOB">
-                                <button class="btn btn-primary dropdown-toggle dropdownBtn" type="button" data-toggle="dropdown">Select Date
-                                    <span class="caret"></span></button>
-                                <ul class="dropdown-menu">
-                                    <li>Date 1</li>
-                                    <li>Date 2</li>
-                                    <li>Date 3</li>
-                                </ul>
+                            <div class="form-group">
+                                <div class="input-group input-append date" id="inputDOB">
+                                    <input type="text" class="form-control" name="date" placeholder="Select Date">
+                                    <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+                                </div>
                             </div>
                         </td>
                         <td>
@@ -108,16 +111,10 @@
                     <tr>
                         <td>
                             <label for="inputGender" class="control-label">Gender:</label>
-
-
-                            <div class="btn-group" id="inputGender">
-                                <button data-toggle="dropdown" class="btn dropdown-toggle"  data-placeholder="Please select">Checked option <span class="caret"></span></button>
-                                <ul class="dropdown-menu">
-                                    <li><input type="radio" id="ID"><label for="ID" name="NAME" value="VALUE">Male</label></li>
-                                    <li><input type="radio" id="ID2"><label for="ID2" name="NAME" value="VALUE">Female</label></li>
-                                </ul>
-                            </div>
-
+                            <select class="form-control" id="inputGender">
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            </select>
                         </td>
                         <td>
                             <button type="button" class="editIcon icon-pencil"><span class="glyphicon glyphicon-pencil"></span></button>
@@ -176,15 +173,15 @@
 
                     <tr>
                         <td>
-                            <label for="inputDOB" class="control-label">Add New Field:</label>
-                            <div class="dropdown" id="inputAddField">
-                                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Single Line Text
-                                    <span class="caret"></span></button>
-                                <ul class="dropdown-menu">
-                                    <li>field 1</li>
-                                    <li>field 2</li>
-                                </ul>
-                            </div>
+                            <label for="inputNewField" class="control-label">Add New Field:</label>
+                            <select class="form-control" id="inputNewField">
+                                <option value="SLTxt">Single Line Text</option>
+                                <option value="fname">First Name</option>
+                                <option value="lname">Last Name</option>
+                                <option value="dob">Date of Birth</option>
+                                <option value="gender">Gender</option>
+                                <option value="roles">Roles</option>
+                            </select>
                         </td>
                         <td>
                             <button type="button" class="editIcon icon-plus"><span class="glyphicon glyphicon-plus"></span></button>
@@ -209,5 +206,3 @@
 
 </body>
 </html>
-
->
