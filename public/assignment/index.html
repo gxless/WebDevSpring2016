@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="FormBuilderApp">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Form Builder</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="css/dashboard.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- AngularJS library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-beta.0/angular.js"></script>
+    <!-- AngularJS Routing library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-beta.0/angular-route.js"></script>
+    <!-- Custom AngularJS Scripts -->
+    <script src="app.js"></script>
+    <script src="config.js"></script>
+    <script src="views/main/main.controller.js"></script>
+    <script src="views/header/header.controller.js"></script>
+    <script src="views/sidebar/sidebar.controller.js"></script>
+    <script src="services/user.service.client.js"></script>
+    <script src="services/forms.service.client.js"></script>
+    <script src="views/home/home.controller.js"></script>
+    <script src="views/admin/admin.controller.js"></script>
+    <script src="views/users/register.controller.js"></script>
+    <script src="views/users/login.controller.js"></script>
+    <script src="views/users/profile.controller.js"></script>
+    <script src="views/forms/forms.controller.js"></script>
+    <script src="views/forms/fields.controller.js"></script>
+
+</head>
+
+<body ng-controller="MainController">
+
+    <div ng-include="'views/header/header.view.html'"></div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div ng-include="'views/sidebar/sidebar.view.html'"></div>
+
+            <div ng-view></div>
+        </div>
+    </div>
+
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<!-- BootStrap JavaScript -->
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+</body>
+</html>

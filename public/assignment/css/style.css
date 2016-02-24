@@ -6,7 +6,7 @@
 }
 /*-------------------custom table-------------------*/
 #admin-table {
-    border: 1px solid #c9c9c9;
+    border: 1px solid #dddddd;
 }
 #admin-table td:nth-child(4) {
     width: 18%;
@@ -18,8 +18,8 @@
 }
 #tableGrid {
     width: 100%;
-    border: 1px solid #c9c9c9;
-    border-top-width: 0;
+    border: 1px solid #dddddd;
+    border-top-width: 0px;
 }
 #tableGrid tr > td {
     padding: 10px;
@@ -34,41 +34,27 @@
     padding-right: 23px;
 }
 /*-------------------edit icon & icons-------------------*/
+.btn:focus {
+    outline: none;
+}
 .editIcon {
     color: white;
     border: 0;
     padding: 8px 10px 6px;
     border-radius: 3px;
 }
-.icon-plus {
-    background-color: #5bc0de;
-}
-.icon-remove {
-    background-color: #d9534f;
-}
-.icon-pencil {
-    background-color: #428bca;
-}
-.icon-ok {
-    background-color: #5cb85c;
-}
-.icon-justify {
-    background-color: #f0ad4e;
-}
 .sorting-icon {
     color: black;
+    background-color: white;
+    border: none;
+    padding: 0;
 }
-.sorting-icon:visited {
-    color: black;
+/*-------------------form validation-------------------*/
+.errorMessage {
+    color: #8a2e2e;
 }
-.sorting-icon:hover {
-    color: black;
-}
-.sorting-icon:active {
-    color: black;
-}
-span.caret {
-    text-align: right;
+.control-label {
+    color: black !important;
 }
 /*-------------------form name as a link-------------------*/
 .form-name {

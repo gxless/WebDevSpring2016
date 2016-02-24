@@ -10,7 +10,7 @@ app.get('/hello', function(req, res){
     res.send('hello world!!');
 });
 app.get('/', function(req, res){
-    res.redirect('./assignment/home.html');
+    res.redirect('./assignment/index.html');
 });
 
 app.listen(port, ipaddress);
