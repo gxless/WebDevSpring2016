@@ -22,6 +22,8 @@
         return api;
 
         function createFormForUser(userId, form, callback) {
+            //there is no need to use userId in this case,
+            //cause the form passed in has already included userId
             forms.push(form);
             callback(form);
         }
@@ -49,6 +51,7 @@
         }
 
         function updateFormById(formId, newForm, callback) {
+
             var formIndex;
             for(formIndex in forms) {
                 if(forms[formIndex]._id === formId) {
@@ -59,9 +62,9 @@
             }
         }
 
-        function findFormByName(formName) {
-            for(var formIndex in forms) {
-                if(forms[formIndex].title === formName) {
+        function findFormByName(index, formName, forms) {
+            for(var i in forms) {
+                if(forms[i].title === formName && (index != i)) {
                     return true;
                 }
             }

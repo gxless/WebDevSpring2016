@@ -4,7 +4,10 @@
         .module("FormBuilderApp")
         .controller("AdminController", AdminController);
 
-    function AdminController($scope) {
-
+    function AdminController($location, UserService) {
+        var currentUser = UserService.getCurrentUser();
+        if(!currentUser) {
+            $location.url("/");
+        }
     }
 })();

@@ -4,7 +4,12 @@
         .module("FormBuilderApp")
         .controller("FieldsController", FieldsController);
 
-    function FieldsController($scope) {
+    function FieldsController($scope, $location, UserService) {
+
+        var currentUser = UserService.getCurrentUser();
+        if(!currentUser) {
+            $location.url("/");
+        }
 
         $scope.click = click;
 

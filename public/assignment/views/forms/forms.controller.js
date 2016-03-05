@@ -4,7 +4,13 @@
         .module("FormBuilderApp")
         .controller("FormController", FormController);
 
-    function FormController($scope, FormService, UserService) {
+    function FormController($scope, $location, FormService, UserService) {
+
+        var currentUser = UserService.getCurrentUser();
+        if(!currentUser) {
+            $location.url("/");
+            currentUser = {_id: null};
+        }
 
         $scope.selectedIndex = -1;
         $scope.formMessage = null;
@@ -14,7 +20,6 @@
         $scope.deleteForm = deleteForm;
         $scope.selectForm = selectForm;
 
-        var currentUser = UserService.getCurrentUser();
         FormService.findAllFormsForUser(currentUser._id, callback);
 
         function callback(data) {
@@ -23,7 +28,7 @@
 
         function addForm(formName) {
             if(formName) {
-                var hasFormName = FormService.findFormByName(formName);
+                var hasFormName = FormService.findFormByName(-1, formName, $scope.forms);
                 if(!hasFormName) {
                     var callback = function(data) {
                         $scope.forms.push(data);
@@ -45,26 +50,42 @@
         }
 
         function updateForm(index) {
-            var callback = function(data) {
-                $scope.forms[index] = data;
-            };
-            var newForm = {
-                _id: $scope.forms[index]._id,
-                title: $scope.formName,
-                userId: currentUser._id
-            };
-            FormService.updateFormById(newForm._id, newForm, callback);
-            $scope.selectedIndex = -1;
-            $scope.formName = "";
+            var hasFormName = FormService.findFormByName(index, $scope.formName, $scope.forms);
+
+            if(!hasFormName) {
+                var callback = function(data) {
+                    $scope.forms[index] = data;
+                };
+                var newForm = {
+                    _id: $scope.forms[index]._id,
+                    title: $scope.formName,
+                    userId: currentUser._id
+                };
+                FormService.updateFormById(newForm._id, newForm, callback);
+
+                $scope.selectedIndex = -1;
+                $scope.formName = "";
+            } else {
+                $scope.formMessage = "Form name already exists";
+
+            }
+
         }
 
         function deleteForm(index) {
-            var callback =function(data) {
-                $scope.forms = data;
-            };
-            $scope.forms.splice(index, 1);
-            //FormService.deleteFormById($scope.forms[index]._id, callback);
             var selectedIndex = $scope.selectedIndex;
+            var callback =function(data) {
+                var forms = [];
+                for(var i in data) {
+                    if(data[i].userId == currentUser._id) {
+                        forms.push(data[i]);
+                    }
+                }
+                $scope.forms = forms;
+            };
+
+            FormService.deleteFormById($scope.forms[index]._id, callback);
+
             if(index < selectedIndex) {
                 $scope.selectedIndex--;
             } else if(index == selectedIndex) {

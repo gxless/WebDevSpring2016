@@ -5,7 +5,7 @@
         .controller("LoginController", LoginController);
 
 
-    function LoginController($scope, $rootScope, $location, UserService) {
+    function LoginController($scope, $location, UserService) {
 
         $scope.loginMessage = null;
         $scope.login = login;
@@ -21,7 +21,6 @@
                 UserService.findUserByCredentials(user.username, user.password, callback);
 
                 if(callbackUser) {
-                    $rootScope.currentUser = callbackUser;
                     UserService.setCurrentUser(callbackUser);
                     $location.url("/profile");
                 } else {

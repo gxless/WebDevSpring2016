@@ -3,10 +3,15 @@
     angular.module("FormBuilderApp")
         .controller("ProfileController", ProfileController);
 
-    function ProfileController($scope, UserService) {
+    function ProfileController($scope, $location, UserService) {
+
+        var currentUser = UserService.getCurrentUser();
+        if(!currentUser) {
+            $location.url("/");
+        }
 
         $scope.updateMessage = null;
-        $scope.currentUser = UserService.getCurrentUser();
+        $scope.currentUser = currentUser;
         $scope.update = update;
 
         function update(currentUser) {

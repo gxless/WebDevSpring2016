@@ -13,12 +13,11 @@
             <ul class="nav navbar-nav navbar-right">
                 <li ng-class="{'active':$location.url()=='/'}" class="nav-xs-show"><a href="#/home">Home</a></li>
                 <li ng-class="{'active':$location.url()=='/profile'}" class="nav-xs-show"><a ng-show="currentUser" href="#/profile">Profile</a></li>
-                <li ng-class="{'active':$location.url()=='/admin'}" class="nav-xs-show"><a ng-show="currentUser&&currentUser.roles.indexOf('admin')>=0" href="#/admin">Admin</a></li>
                 <li ng-class="{'active':$location.url()=='/forms'}" class="nav-xs-show"><a ng-show="currentUser" href="#/forms">Forms</a></li>
+                <li ng-class="{'active':$location.url()=='/admin'}" ><a ng-show="currentUser&&currentUser.roles.indexOf('admin')>=0" href="#/admin">Admin</a></li>
                 <li ng-class="{'active':$location.url()=='/register'}" ><a ng-hide="currentUser" href="#/register">Register</a></li>
                 <li ng-class="{'active':$location.url()=='/login'}"><a ng-hide="currentUser" href="#/login">Login</a></li>
                 <li><a ng-show="currentUser" href="#/profile">{{currentUser.username}}</a></li>
-                <li ng-class="{'active':$location.url()=='/admin'}" ><a ng-show="currentUser&&currentUser.roles.indexOf('admin')>=0" href="#/admin">Admin</a></li>
                 <li><a ng-show="currentUser" ng-click="logout()" href="#/">Logout</a></li>
             </ul>
         </div>

@@ -29,7 +29,7 @@
             findUserByUsername : findUserByUsername,
             findUserByEmail : findUserByEmail,
             setCurrentUser : setCurrentUser,
-            getCurrentUser :getCurrentUser
+            getCurrentUser :getCurrentUser,
         };
 
         return api;
@@ -107,6 +107,7 @@
         function getCurrentUser() {
             return $rootScope.currentUser;
         }
+
     }
 
 })();
