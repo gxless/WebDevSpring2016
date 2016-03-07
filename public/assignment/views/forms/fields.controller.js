@@ -11,12 +11,6 @@
             $location.url("/");
         }
 
-        $scope.click = click;
 
-        function click() {
-            $scope.input = ".";
-            $scope.input = "";
-
-        }
     }
 })();
