@@ -1,0 +1,53 @@
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <h1 class="page-header">Forms</h1>
+    <div ng-show="formMessage" class="alert alert-danger">{{formMessage}}</div>
+
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="#/forms">Forms</a></li>
+        <li><a href="#/fields">Fields</a></li>
+    </ul>
+
+    <div class="table-responsive">
+        <table id="tableGrid" class="table table-striped">
+            <thead>
+            <tr>
+                <th><button class="sorting-icon"><span class="glyphicon glyphicon-triangle-bottom"></span></button> Form Name</th>
+                <th id="action-style"><button class="sorting-icon"><span class="glyphicon glyphicon-triangle-bottom"></span></button> Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-form name="form">
+                <td><input ng-model="formName" type="text" class="form-control" id="formName" name="formName" placeholder="Form Name" required></td>
+                <td>
+                    <button ng-click="addForm(formName)" ng-disabled="selectedIndex!=-1" type="button" class="btn btn-info editIcon"><span class="glyphicon glyphicon-plus"></span></button>
+                    <button ng-click="updateForm(selectedIndex)" ng-disabled="form.formName.$invalid || selectedIndex==-1" type="button" class="btn btn-success editIcon"><span class="glyphicon glyphicon-ok"></span></button>
+                </td>
+            </tr>
+            <tr ng-repeat="form in forms" ng-class="{'success':$index == selectedIndex}">
+                <td><button ng-click="visitForm(form._id)" class="btn formTitle">{{form.title}}</button></td>
+                <td>
+                    <button ng-click="deleteForm($index)" type="button" class="btn btn-danger editIcon"><span class="glyphicon glyphicon-remove"></span></button>
+                    <button ng-click="selectForm($index)" type="button" class="btn btn-primary editIcon"><span class="glyphicon glyphicon-pencil"></span></button>
+                </td>
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+    <p class="alert alert-info"><strong>Tips:</strong><br /><br />
+        <button ng-disabled="selectedIndex!=-1" type="button" class="btn btn-info editIcon"><span class="glyphicon glyphicon-plus"></span></button>
+        : create a new form
+        <br /><br />
+        <button type="button" class="btn btn-primary editIcon"><span class="glyphicon glyphicon-pencil"></span></button>
+        : edit the existing form's title
+        <br /><br />
+        <button type="button" class="btn btn-success editIcon"><span class="glyphicon glyphicon-ok"></span></button>
+        : finish edit
+        <br /><br />
+        <button type="button" class="btn btn-danger editIcon"><span class="glyphicon glyphicon-remove"></span></button>
+        : remove form
+    </p>
+
+</div>
+
+

@@ -1,0 +1,121 @@
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <h1 class="page-header">Form: {{model.title}}</h1>
+    <div ng-show="fieldMessage" class="alert alert-danger">{{fieldMessage}}</div>
+
+    <ul class="nav nav-tabs">
+        <li><a href="#/forms">Forms</a></li>
+        <li class="active"><a href="#/fields">Fields</a></li>
+    </ul>
+    <div class="table-responsive">
+        <table id="tableGrid" class="table table-striped">
+
+            <thead>
+                <tr>
+                    <th>{{model.title}}</th>
+                    <th> </th>
+                </tr>
+            </thead>
+
+            <tbody edit-sortable>
+
+                <tr ng-repeat="field in model.fields" id="{{field._id}}">
+
+                    <td colspan="2" class="noPadding">
+                        <div class="col-xs-12">
+
+                            <div class="row">
+                                <div class="col-sm-6 editPadding" ng-switch="field.type">
+
+                                    <label class="control-label">{{field.label}}</label><br/>
+
+                                    <textarea ng-switch-when="TEXTAREA" ng-model="textarea" class="form-control" placeholder="{{field.placeholder}}" rows="3" disabled></textarea>
+
+                                    <div ng-switch-when="CHECKBOXES" ng-model="checkboxes" ng-repeat="option in field.options" class="checkbox">
+                                        <label>
+                                            <input type="checkbox" value="{{option.value}}">{{option.label}}
+                                        </label>
+                                    </div>
+
+                                    <div ng-switch-when="RADIOS" ng-repeat="option in field.options" class="radio">
+                                        <label>
+                                            <input type="radio" name="radio_{{$parent.$index}}" value="{{option.value}}"> {{option.label}}
+                                        </label>
+                                    </div>
+
+                                    <select ng-switch-when="OPTIONS" ng-init="dropdown = field.options[0]" ng-model="dropdown"
+                                            ng-options="option.label for option in field.options" class="form-control">
+                                    </select>
+
+                                    <div ng-switch-when="DATE" class="form-group date">
+                                        <div date-picker class="input-group input-append date datePicker">
+                                            <input ng-change="updateField(field._id, $index)" type="text" class="form-control" ng-model="model.fields[$index].value">
+                                            <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+                                        </div>
+                                    </div>
+
+                                    <input ng-switch-default type="text" class="form-control" placeholder="{{field.placeholder}}" disabled>
+
+                                </div>
+
+
+                                <div class="col-sm-6 editPadding text-align-right">
+                                    <button ng-click="editField($index)" type="button" class="btn btn-primary editIcon"><span class="glyphicon glyphicon-pencil"></span></button>
+                                    <button ng-click="cloneField(field._id)" type="button" class="btn btn-info editIcon"><span class="glyphicon glyphicon-plus"></span></button>
+                                    <button ng-click="removeField(field._id, $index)" type="button" class="btn btn-danger editIcon"><span class="glyphicon glyphicon-remove"></span></button>
+                                    <button type="button" class="btn btn-warning editIcon sortableBtn"><span class="glyphicon glyphicon-align-justify"></span></button>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <edit-dialog ng-show="editShownIndex == $index" class="col-xs-12 bg-info"></edit-dialog>
+                            </div>
+
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="table-responsive addNewField">
+        <div class="col-xs-6 noPadding">
+            <label for="inputNewField" class="control-label">Add New Field:</label>
+            <select ng-model="fieldType" class="form-control" id="inputNewField">
+                <option value="TEXT">Single Line Text Field</option>
+                <option value="TEXTAREA">Multi Line Text Field</option>
+                <option value="DATE">Date Field</option>
+                <option value="OPTIONS">Dropdown Field</option>
+                <option value="CHECKBOXES">Checkboxes Field</option>
+                <option value="RADIOS">Radio Buttons Field</option>
+            </select>
+        </div>
+        <div class="col-xs-6 noPadding text-align-right">
+            <button ng-click="addField(fieldType)" type="button" class="btn btn-info editIcon"><span class="glyphicon glyphicon-plus"></span></button>
+        </div>
+    </div>
+    <br />
+
+    <p class="alert alert-info"><strong>Tips:</strong><br /><br />
+        <button type="button" class="btn btn-info editIcon"><span class="glyphicon glyphicon-plus"></span></button>
+        : create a new field / clone field
+        <br /><br />
+        <button type="button" class="btn btn-primary editIcon"><span class="glyphicon glyphicon-pencil"></span></button>
+        : edit field
+        <br /><br />
+        <button type="button" class="btn btn-danger editIcon"><span class="glyphicon glyphicon-remove"></span></button>
+        : remove field
+        <br /><br />
+        <button type="button" class="btn btn-warning editIcon sortableBtn"><span class="glyphicon glyphicon-align-justify"></span></button>
+        : reorder field
+        <br /><br />
+        <button type="button" class="btn btn-success editIcon"><span class="glyphicon glyphicon-ok"></span></button>
+        : finish edit
+        <br /><br />
+        <button type="button" class="btn btn-cancel editIcon"><span class="glyphicon glyphicon-chevron-up"></span></button>
+        : collapse edit window
+    </p>
+
+</div>
+
+
+

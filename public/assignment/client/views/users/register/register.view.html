@@ -1,0 +1,81 @@
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <h1 class="page-header">Register</h1>
+    <div ng-show="registerMessage" class="alert alert-danger">{{registerMessage}}</div>
+
+    <form class="form-horizontal" name="registerForm" novalidate>
+        <div class="form-group has-feedback"
+             ng-class="{
+             'has-error':registerForm.username.$invalid && (registerForm.username.$dirty || registerForm.$submitted),
+             'has-success':registerForm.username.$valid}">
+            <label for="inputUsername" class="col-sm-2 control-label text-align-left">Username:</label>
+            <div class="col-sm-10">
+                <input ng-model="user.username" ng-minlength="3" ng-maxlength="25" type="text" class="form-control" id="inputUsername" name="username" placeholder="Username" required>
+
+                <span class="glyphicon form-control-feedback"
+                      ng-class="{'glyphicon-remove':registerForm.username.$invalid && (registerForm.username.$dirty || registerForm.$submitted),
+                      'glyphicon-ok':registerForm.username.$valid}"></span>
+                <span ng-show="registerForm.username.$error.required && (registerForm.username.$dirty || registerForm.$submitted)" class="errorMessage">username is required</span>
+                <span ng-show="registerForm.username.$error.minlength && registerForm.username.$dirty" class="errorMessage">username at least 3 characters</span>
+                <span ng-show="registerForm.username.$error.maxlength && registerForm.username.$dirty" class="errorMessage">username no more than 25 characters</span>
+            </div>
+        </div>
+
+        <div class="form-group has-feedback"
+             ng-class="{
+             'has-error':registerForm.password.$invalid && (registerForm.password.$dirty || registerForm.$submitted),
+             'has-success':registerForm.password.$valid}">
+            <label for="inputPassword" class="col-sm-2 control-label text-align-left">Password:</label>
+            <div class="col-sm-10">
+                <input ng-model="user.password" ng-minlength="3" ng-maxlength="25" type="password" class="form-control" id="inputPassword" name="password" placeholder="Password" required>
+
+                <span class="glyphicon form-control-feedback"
+                      ng-class="{'glyphicon-remove':registerForm.password.$invalid && (registerForm.password.$dirty || registerForm.$submitted),
+                      'glyphicon-ok':registerForm.password.$valid}"></span>
+                <span ng-show="registerForm.password.$error.required && (registerForm.password.$dirty || registerForm.$submitted)" class="errorMessage">password is required</span>
+                <span ng-show="registerForm.password.$error.minlength && registerForm.password.$dirty" class="errorMessage">password at least 3 characters</span>
+                <span ng-show="registerForm.password.$error.maxlength && registerForm.password.$dirty" class="errorMessage">password no more than 25 characters</span>
+            </div>
+        </div>
+
+        <div class="form-group has-feedback"
+             ng-class="{
+             'has-success':registerForm.password.$valid && (user.password == verPassword),
+             'has-error':(registerForm.vPassword.$invalid || (user.password != verPassword)) && (registerForm.vPassword.$dirty || registerForm.$submitted)}">
+            <label for="inputVPassword" class="col-sm-2 control-label text-align-left">Verify Password:</label>
+            <div class="col-sm-10">
+                <input ng-model="verPassword" ng-minlength="3" ng-maxlength="25" type="password" class="form-control" id="inputVPassword" name="vPassword" placeholder="Verify Password" required>
+
+                <span class="glyphicon form-control-feedback"
+                      ng-class="{'glyphicon-ok':registerForm.password.$valid && (user.password == verPassword),
+                      'glyphicon-remove':(registerForm.vPassword.$invalid || (user.password != verPassword)) && (registerForm.vPassword.$dirty || registerForm.$submitted)}"></span>
+                <span ng-show="registerForm.vPassword.$error.required && (registerForm.vPassword.$dirty || registerForm.$submitted)" class="errorMessage">validation is required</span>
+            </div>
+        </div>
+
+        <div class="form-group has-feedback"
+             ng-class="{'has-success':registerForm.email.$valid,
+             'has-error':registerForm.email.$invalid && (registerForm.email.$dirty || registerForm.$submitted)}">
+            <label for="inputEmail" class="col-sm-2 control-label text-align-left">Email:</label>
+            <div class="col-sm-10">
+                <input ng-model="user.email" type="email" class="form-control" id="inputEmail" name="email" placeholder="Email" required>
+
+                <span class="glyphicon form-control-feedback"
+                      ng-class="{'glyphicon-ok':registerForm.email.$valid,
+                      'glyphicon-remove':registerForm.email.$invalid && (registerForm.email.$dirty || registerForm.$submitted)}"></span>
+                <span ng-show="registerForm.email.$error.required && (registerForm.email.$dirty || registerForm.$submitted)" class="errorMessage">email is required</span>
+                <span ng-show="registerForm.email.$invalid && registerForm.email.$dirty && !registerForm.email.$error.required" class="errorMessage">invalid email address</span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <input ng-click="register(user)" type="submit" class="form-control btn-primary" value="Register">
+            </div>
+        </div>
+
+    </form>
+</div>
+
+
+
+

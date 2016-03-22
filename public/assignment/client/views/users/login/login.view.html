@@ -1,0 +1,31 @@
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    <h1 class="page-header">Login</h1>
+    <div ng-show="loginMessage" class="alert alert-danger">{{loginMessage}}</div>
+
+    <form class="form-horizontal" name="loginForm" novalidate>
+        <div class="form-group has-feedback" ng-class="{'has-error':loginForm.username.$invalid && (loginForm.username.$dirty || loginForm.$submitted)}">
+            <label for="inputUsername" class="col-sm-2 control-label text-align-left">Username:</label>
+            <div class="col-sm-10">
+                <input ng-model="user.username" type="text" class="form-control" id="inputUsername" name="username" placeholder="Username" required>
+                <span class="glyphicon form-control-feedback" ng-class="{'glyphicon-remove':loginForm.username.$invalid && (loginForm.username.$dirty || loginForm.$submitted)}"></span>
+                <span ng-show="loginForm.username.$error.required && (loginForm.username.$dirty || loginForm.$submitted)" class="errorMessage">username is required</span>
+            </div>
+        </div>
+        <div class="form-group has-feedback" ng-class="{'has-error':loginForm.password.$invalid && (loginForm.password.$dirty || loginForm.$submitted)}">
+            <label for="inputPassword" class="col-sm-2 control-label text-align-left">Password:</label>
+            <div class="col-sm-10">
+                <input ng-model="user.password" type="password" class="form-control" id="inputPassword" name="password" placeholder="Password" required>
+                <span class="glyphicon form-control-feedback" ng-class="{'glyphicon-remove':loginForm.password.$invalid && (loginForm.password.$dirty || loginForm.$submitted)}"></span>
+                <span ng-show="loginForm.password.$error.required && (loginForm.password.$dirty || loginForm.$submitted)" class="errorMessage">password is required</span>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <input ng-click="login(user)" type="submit" class="form-control btn-primary" value="Login">
+            </div>
+        </div>
+    </form>
+</div>
+
+
+

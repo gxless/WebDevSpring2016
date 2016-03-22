@@ -1,0 +1,137 @@
+<div class="row">
+    <div class="col-xs-6 editSec">
+        <p class="editTitle"><b>Edit Here</b></p>
+    </div>
+    <div class="col-xs-6 text-align-right editSec">
+        <button ng-click="updateField(field._id, $index, true)" type="button" class="btn btn-success editIcon"><span class="glyphicon glyphicon-ok"></span></button>
+        <button ng-click="editCancel()" type="button" class="btn btn-cancel editIcon"><span class="glyphicon glyphicon-chevron-up"></span></button>
+    </div>
+</div>
+
+<div ng-show="hasError" class="row editError">
+    <div class="col-xs-12 alert alert-danger">
+        {{message}}
+    </div>
+</div>
+
+<div class="row">
+    <div ng-switch="field.type" class="col-xs-12">
+
+        <div class="form-group row">
+            <div class="col-sm-6">
+                <label class="control-label">Set Label <span class="requiredText">(required)</span></label>
+                <input ng-model="field.label" type="text" class="form-control" placeholder="Label">
+            </div>
+        </div>
+
+        <div ng-switch-when="TEXT" class="form-group row">
+            <div class="col-sm-6">
+                <label class="control-label">Set Placeholder</label>
+                <input ng-model="field.placeholder" type="text" class="form-control" placeholder="Placeholder">
+            </div>
+        </div>
+
+        <div ng-switch-when="TEXTAREA" class="form-group row">
+            <div class="col-sm-6">
+                <label class="control-label">Set Placeholder</label>
+                <input ng-model="field.placeholder" type="text" class="form-control" placeholder="Placeholder">
+            </div>
+        </div>
+
+        <div ng-switch-when="DATE" class="form-group">
+        </div>
+
+        <div ng-switch-when="OPTIONS" class="form-group row">
+            <div class="col-xs-12">
+                <label class="control-label">Set Options <span class="requiredText">(at least one)</span></label>
+                <div class="row">
+                    <div class="col-xs-5">
+                        <label class="control-label">Label</label>
+                    </div>
+                    <div class="col-xs-5">
+                        <label class="control-label">Value</label>
+                    </div>
+                    <div class="col-xs-2 noPadding">
+                        <button ng-click="addOption(field._id, $index)" class="btn addBtn"><span class="glyphicon glyphicon-plus"></span></button>
+                    </div>
+                </div>
+
+                <div ng-repeat="option in field.options" class="row optionRow">
+                    <div class="col-xs-5">
+                        <input ng-blur="updateField(field._id, $parent.$index)" ng-model="option.label" class="form-control" placeholder="Label">
+                    </div>
+                    <div class="col-xs-5">
+                        <input ng-blur="updateField(field._id, $parent.$index)" ng-model="option.value" class="form-control" placeholder="Value">
+                    </div>
+                    <div class="col-xs-2 deleteBtnPadding">
+                        <button ng-click="deleteOption(field._id, $parent.$index, $index, field.options)" class="btn deleteBtn"><span class="glyphicon glyphicon-remove"></span></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div ng-switch-when="CHECKBOXES" class="form-group row">
+            <div class="col-xs-12">
+                <label class="control-label">Set Options <span class="requiredText">(at least one)</span></label>
+                <div class="row">
+                    <div class="col-xs-5">
+                        <label class="control-label">Label</label>
+                    </div>
+                    <div class="col-xs-5">
+                        <label class="control-label">Value</label>
+                    </div>
+                    <div class="col-xs-2 noPadding">
+                        <button ng-click="addOption(field._id, $index)" class="btn addBtn"><span class="glyphicon glyphicon-plus"></span></button>
+                    </div>
+                </div>
+
+                <div ng-repeat="option in field.options" class="row optionRow">
+                    <div class="col-xs-5">
+                        <input  ng-blur="updateField(field._id, $parent.$index)" ng-model="option.label" class="form-control" placeholder="Label">
+                    </div>
+                    <div class="col-xs-5">
+                        <input ng-blur="updateField(field._id, $parent.$index)" ng-model="option.value" class="form-control" placeholder="Value">
+                    </div>
+                    <div class="col-xs-2 deleteBtnPadding">
+                        <button ng-click="deleteOption(field._id, $parent.$index,  $index, field.options)" class="btn deleteBtn"><span class="glyphicon glyphicon-remove"></span></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div ng-switch-when="RADIOS" class="form-group row">
+            <div class="col-xs-12">
+                <label class="control-label">Set Options <span class="requiredText">(at least one)</span></label>
+                <div class="row">
+                    <div class="col-xs-5">
+                        <label class="control-label">Label</label>
+                    </div>
+                    <div class="col-xs-5">
+                        <label class="control-label">Value</label>
+                    </div>
+                    <div class="col-xs-2 noPadding">
+                        <button ng-click="addOption(field._id, $index)" class="btn addBtn"><span class="glyphicon glyphicon-plus"></span></button>
+                    </div>
+                </div>
+
+                <div ng-repeat="option in field.options" class="row optionRow">
+                    <div class="col-xs-5">
+                        <input ng-blur="updateField(field._id, $parent.$index)" ng-model="option.label" class="form-control" placeholder="Label">
+                    </div>
+                    <div class="col-xs-5">
+                        <input ng-blur="updateField(field._id, $parent.$index)" ng-model="option.value" class="form-control" placeholder="Value">
+                    </div>
+                    <div class="col-xs-2 deleteBtnPadding">
+                        <button ng-click="deleteOption(field._id, $parent.$index, $index, field.options)" class="btn deleteBtn"><span class="glyphicon glyphicon-remove"></span></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
+
+

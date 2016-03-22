@@ -1,0 +1,154 @@
+/*-------------------media query-------------------*/
+@media (min-width: 768px) {
+    .nav-xs-show {
+        display: none !important;
+    }
+}
+/*-------------------custom table-------------------*/
+#admin-table {
+    border: 1px solid #dddddd;
+}
+#admin-table td:nth-child(4) {
+    width: 18%;
+    text-align: right;
+}
+#admin-table th:nth-child(4) {
+    text-align: right;
+    padding-right: 20px;
+}
+#tableGrid {
+    width: 100%;
+    border: 1px solid #dddddd;
+    border-top-width: 0px;
+}
+#tableGrid tr > td {
+    padding: 10px;
+}
+#tableGrid td:nth-child(2) {
+    text-align: right;
+    vertical-align: top;
+    width: 50%;
+}
+#action-style {
+    text-align: right;
+    padding-right: 23px;
+}
+/*-------------------edit icon & icons-------------------*/
+.btn:focus {
+    outline: none;
+}
+.editIcon {
+    color: white;
+    border: 0;
+    padding: 8px 10px 6px;
+    border-radius: 3px;
+}
+.sorting-icon {
+    color: black;
+    background-color: white;
+    border: none;
+    padding: 0;
+}
+.btn-cancel {
+    background-color: #c3c3c3;
+}
+.btn-cancel:hover {
+    color: white;
+    background-color: #a5a5a5;
+}
+.requiredText {
+    color: #838383;
+}
+/*-------------------forms validation-------------------*/
+.errorMessage {
+    color: #8a2e2e;
+}
+.control-label {
+    color: black !important;
+}
+/*-------------------forms name as a link-------------------*/
+.formTitle {
+    background-color: transparent;
+    padding: 5px 0 0 10px;
+    color: #3d7cb6;
+    font-size: 14px;
+}
+.formTitle:hover {
+    color: #3d7cb6;
+    text-decoration: underline;
+}
+.formTitle:focus {
+    color: #3d7cb6;
+}
+.form-name {
+    color: black;
+}
+.form-name:hover {
+    text-decoration: none;
+}
+/*-------------------dropdown box-------------------*/
+.dropdownBtn {
+    width: 100%;
+}
+span.dropdownTxt {
+    width: 80%;
+    text-align: left;
+    border: 1px solid;
+}
+/*-------------------edit dialog style-------------------*/
+.editPadding {
+    padding: 10px;
+}
+.editSec {
+    padding: 15px 15px 0 15px;
+}
+.editRow {
+    margin-top: 15px;
+}
+.editError {
+    padding: 15px 15px 0;
+}
+.editTitle {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+.addNewField {
+    border: 1px solid #dddddd;
+    padding: 10px;
+}
+.optionRow {
+    margin-bottom: 5px;
+}
+.addBtn {
+    background-color: transparent;
+    padding: 0;
+    color: #428bca;
+}
+.addBtn:hover, .addBtn:focus {
+    color: #3d7cb6;
+}
+.deleteBtn {
+    background-color: transparent;
+    padding: 0;
+    color: #bb3837;
+}
+.deleteBtn:hover, .deleteBtn:focus {
+    color: #ae3837;
+}
+.deleteBtnPadding {
+    padding: 7px 0 0 0;
+}
+/*-------------------text align style-------------------*/
+.text-align-left {
+    text-align: left !important;
+}
+.text-align-right {
+    text-align: right !important;
+}
+.noPadding {
+    padding: 0 !important;
+}
+.blockDisplay {
+    display: block;
+}
+
