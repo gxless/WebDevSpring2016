@@ -15,7 +15,6 @@
 
 
         function update(currentUser) {
-
             if($scope.profileForm.$valid) {
                 var userId = UserService.getCurrentUser()._id;
 

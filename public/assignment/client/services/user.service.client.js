@@ -22,7 +22,7 @@
 
         function findUserByUsername(username) {
             var deferred = $q.defer();
-            $http.get("/api/assignment/user/" + username)
+            $http.get("/api/assignment/user/username/" + username)
                 .success(function (response) {
                     deferred.resolve(response);
                 });

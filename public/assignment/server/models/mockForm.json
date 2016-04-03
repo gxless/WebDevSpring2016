@@ -1,6 +1,5 @@
-[
-  {
-    "title": "Contacts", "userId": "56fefb9cf2f10e7258e28d83",
+[{
+    "_id": "000", "title": "Contacts", "userId": 123,
     "fields": [
       {"_id": "111", "label": "First Name", "type": "TEXT", "placeholder": "First Name"},
       {"_id": "222", "label": "Last Name", "type": "TEXT", "placeholder": "Last Name"},
@@ -26,20 +25,20 @@
       {"_id": "999", "label": "Date of Birth", "type": "DATE", "value": "03/06/2016"}
     ]
   },
-  { "title": "ToDo", "userId": "56fefb9cf2f10e7258e28d84",
+  {"_id": "010", "title": "ToDo", "userId": 234,
     "fields": [
       {"_id": "777", "label": "Title", "type": "TEXT", "placeholder": "Title"},
       {"_id": "888", "label": "Description", "type": "TEXTAREA", "placeholder": "Title"},
       {"_id": "999", "label": "Due Date", "type": "DATE", "placeholder": ""}
     ]
   },
-  { "title": "Registration Form", "userId": "56fefb9cf2f10e7258e28d83",
+  {"_id": "020", "title": "Registration Form", "userId": 123,
     "fields": [
       {"_id": "777", "label": "Title", "type": "TEXT", "placeholder": "Title"},
       {"_id": "888", "label": "Description", "type": "TEXTAREA", "placeholder": "Title"},
       {"_id": "999", "label": "Due Date", "type": "DATE", "placeholder": ""}
     ]
   },
-  { "title": "New Form", "userId": "56fefb9cf2f10e7258e28d83", "fields": []
+  {"_id": "030", "title": "New Form", "userId": 123, "fields": []
   }
 ]

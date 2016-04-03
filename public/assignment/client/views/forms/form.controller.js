@@ -11,7 +11,7 @@
         if(currentUser == null) {
             $location.url("/home");
         } else {
-            FormService.findAllFormsForUser(currentUser._id)
+            FormService.getAllFormsForUser(currentUser._id)
                 .then(function (response) {
                     $scope.forms = response;
                 });
@@ -41,7 +41,7 @@
 
                     FormService.createFormForUser(currentUser._id, form)
                         .then(function (response) {
-                            $scope.forms = response;
+                            $scope.forms.push(response);
                         });
 
                     $scope.formName = null;
@@ -85,8 +85,9 @@
 
             FormService.deleteFormById(formId)
                 .then(function (response) {
-                    $scope.forms = response;
-
+                    if(response) {
+                        $scope.forms.splice(index, 1);
+                    }
                 });
 
             if(index < selectedIndex) {
@@ -106,7 +107,7 @@
 
         function visitForm(formId) {
             FieldService.setFormId(formId);
-            $location.url("/fields/form/" + formId + "/fields");
+            $location.url("/form/" + formId + "/field");
         }
 
     }

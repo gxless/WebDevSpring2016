@@ -8,6 +8,7 @@ module.exports = function() {
         updateFormById: updateFormById,
         deleteFormById: deleteFormById,
         getFieldsForForm: getFieldsForForm,
+
         addFieldForForm: addFieldForForm,
         updateFieldFromForm: updateFieldFromForm,
         cloneFieldForForm: cloneFieldForForm,

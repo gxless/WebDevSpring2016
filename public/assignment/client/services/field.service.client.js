@@ -9,14 +9,10 @@
 
         var api = {
             createFieldForForm: createFieldForForm,
-            getFieldsForForm: getFieldsForForm,
-            getFieldForForm: getFieldForForm,
             deleteFieldFromForm: deleteFieldFromForm,
             updateField: updateField,
             cloneFieldForForm: cloneFieldForForm,
             changeFieldOrder: changeFieldOrder,
-            createOptionForField: createOptionForField,
-            deleteOptionForField: deleteOptionForField,
             setFormId: setFormId,
             getFormId: getFormId,
             getTodayDate: getTodayDate
@@ -26,6 +22,7 @@
 
         function createFieldForForm(formId, field) {
             var deferred = $q.defer();
+            delete field._id;
             $http.post("/api/assignment/form/" + formId + "/field", field)
                 .success(function (response) {
                     deferred.resolve(response);
@@ -33,18 +30,6 @@
             return deferred.promise;
         }
 
-        function getFieldsForForm(formId) {
-            var deferred = $q.defer();
-            $http.get("/api/assignment/form/" + formId + "/field")
-                .success(function (response) {
-                    deferred.resolve(response);
-                });
-            return deferred.promise;
-        }
-
-        function getFieldForForm(formId, fieldId) {
-
-        }
 
         function deleteFieldFromForm(formId, fieldId) {
             var deferred = $q.defer();
@@ -73,27 +58,9 @@
             return deferred.promise;
         }
 
-        function changeFieldOrder(formId, newOrder) {
+        function changeFieldOrder(formId, fieldId, newOrder) {
             var deferred = $q.defer();
-            $http.post("/api/assignment/form/" + formId, newOrder)
-                .success(function (response) {
-                    deferred.resolve(response);
-                });
-            return deferred.promise;
-        }
-
-        function createOptionForField(formId, fieldId) {
-            var deferred = $q.defer();
-            $http.put("/api/assignment/form/" + formId + "/field/" + fieldId + "/option")
-                .success(function (response) {
-                    deferred.resolve(response);
-                });
-            return deferred.promise;
-        }
-
-        function deleteOptionForField(formId, fieldId, index) {
-            var deferred = $q.defer();
-            $http.delete("/api/assignment/form/" + formId + "/field/" + fieldId + "/option/" + index)
+            $http.get("/api/assignment/form/" + formId + "/field/" + fieldId + "/order/" + newOrder)
                 .success(function (response) {
                     deferred.resolve(response);
                 });

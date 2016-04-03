@@ -1,42 +1,44 @@
-module.exports = function(app) {
+module.exports = function(app, UserModel) {
 
-    var userModel = require("./../models/user.model.js")();
-
-    app.get("/api/assignment/user/:username", findUserByUsername);
-    app.get("/api/assignment/user/email/:email", findUserByEmail);
+    app.get("/api/assignment/user/username/:username", getUserByUsername);
+    app.get("/api/assignment/user/email/:email", getUserByEmail);
     app.post("/api/assignment/user", register);
+    app.put("/api/assignment/user/:userId", updateUser);
     app.post("/api/assignment/user/:username", login);
-    app.put("/api/assignment/user/:id", update);
 
+    function getUserByUsername(req, res) {
+        UserModel.getUserByUsername(req.params.username)
+            .then(function (response) {
+                res.json(response);
+            });
+    }
+
+    function getUserByEmail(req, res) {
+        UserModel.getUserByEmail(req.params.email)
+            .then(function (response) {
+                res.json(response);
+            });
+    }
 
     function register(req, res) {
-        var newUser = req.body;
-        var currentUser = userModel.createUser(newUser);
-        res.json(currentUser);
+        UserModel.register(req.body)
+            .then(function (response) {
+                res.json(response);
+            });
     }
 
     function login(req, res) {
-        var credentials = req.body;
-        var currentUser = userModel.findUserByCredentials(credentials.username, credentials.password);
-        res.json(currentUser);
+        UserModel.login(req.body)
+            .then(function (response) {
+                res.json(response);
+            });
     }
 
-    function update(req, res) {
-        var userId = req.params.id;
-        var updatedUser = req.body;
-        var currentUser = userModel.updateUserById(userId, updatedUser);
-        res.json(currentUser);
-    }
-
-    function findUserByUsername(req, res) {
-        var username = req.params.username;
-        var hasUsername = userModel.findUserByUsername(username);
-        res.json(hasUsername);
-    }
-    function findUserByEmail(req, res) {
-        var email = req.params.email;
-        var hasEmail = userModel.findUserByEmail(email);
-        res.json(hasEmail);
+    function updateUser(req, res) {
+        UserModel.updateUser(req.params.userId, req.body)
+            .then(function (response) {
+                res.json(response);
+            });
     }
 
 

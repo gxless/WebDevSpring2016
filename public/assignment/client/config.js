@@ -31,7 +31,7 @@
                     templateUrl: "views/forms/field.view.html",
                     controller: "FieldController"
                 })
-                .when("/fields/form/:formId/fields", {
+                .when("/form/:formId/field", {
                     templateUrl: "views/forms/field.view.html",
                     controller: "FieldController"
                 })

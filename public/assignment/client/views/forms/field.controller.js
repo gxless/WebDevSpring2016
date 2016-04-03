@@ -4,7 +4,7 @@
         .module("FormBuilderApp")
         .controller("FieldController", FieldController);
 
-    function FieldController($routeParams, $scope, $location, UserService, FieldService) {
+    function FieldController($routeParams, $scope, $location, UserService, FieldService, FormService) {
 
         var currentUser = UserService.getCurrentUser();
 
@@ -21,7 +21,6 @@
         $scope.editField = editField;
         $scope.updateField = updateField;
         $scope.removeField = removeField;
-        $scope.editCancel = editCancel;
         $scope.cloneField = cloneField;
         $scope.sortField = sortField;
         $scope.addOption = addOption;
@@ -35,7 +34,7 @@
             $scope.fieldMessage = null;
         }
 
-        FieldService.getFieldsForForm(formId)
+        FormService.getFormById(formId)
             .then(function (response) {
                 $scope.model = response;
             });
@@ -62,7 +61,7 @@
 
             FieldService.createFieldForForm(formId, field)
                 .then(function (response) {
-                    $scope.model = response;
+                    $scope.model.fields.push(response);
                 });
         }
 
@@ -86,8 +85,10 @@
         function removeField(fieldId, index) {
             $scope.hasError = false;
             FieldService.deleteFieldFromForm(formId, fieldId)
-                .then(function (response) {
-                    $scope.model.fields = response;
+                .then(function (status) {
+                    if(status.ok == 1) {
+                        $scope.model.fields.splice(index, 1);
+                    }
                 });
             if(index < $scope.editShownIndex) {
                 $scope.editShownIndex--;
@@ -100,7 +101,7 @@
             $scope.hasError = false;
             FieldService.cloneFieldForForm(formId, fieldId)
                 .then(function (response) {
-                    $scope.model.fields = response;
+                    $scope.model.fields.push(response);
                 });
 
         }
@@ -110,16 +111,12 @@
             $scope.editShownIndex = index;
         }
 
-        function editCancel() {
-            $scope.hasError = false;
-            $scope.editShownIndex = -1;
-        }
 
         function sortField(oriPosition, newPosition) {
             $scope.hasError = false;
-            var changedOrder = [oriPosition, newPosition];
             if(oriPosition != newPosition) {
-                FieldService.changeFieldOrder(formId, changedOrder)
+                var fieldId = $scope.model.fields[oriPosition]._id;
+                FieldService.changeFieldOrder(formId, fieldId, newPosition)
                     .then(function (response) {
                         $scope.model.fields = response;
                         if($scope.editShownIndex == oriPosition) {
@@ -134,25 +131,21 @@
 
         }
 
-        function addOption(fieldId, index) {
-            FieldService.createOptionForField(formId, fieldId)
-                .then(function (response) {
-                    $scope.model.fields[index].options = response;
-                });
+        function addOption(fieldIndex) {
+            var option = {label: "Option", value: "OPTION"};
+            $scope.model.fields[fieldIndex].options.push(option);
+            $scope.hasError = false;
+            $scope.message = "";
         }
 
-        function deleteOption(fieldId, fieldIndex, optionIndex, options) {
+        function deleteOption(fieldIndex, optionIndex, options) {
             $scope.hasError = false;
-            if(options.length > 1) {
-                FieldService.deleteOptionForField(formId, fieldId, optionIndex)
-                    .then(function (response) {
-                        $scope.model.fields[fieldIndex].options = response;
-                    });
+            if(options > 1) {
+                $scope.model.fields[fieldIndex].options.splice(optionIndex, 1);
             } else {
                 $scope.message = "Options cannot be less than one";
                 $scope.hasError = true;
             }
-
         }
 
     }

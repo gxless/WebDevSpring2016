@@ -7,7 +7,8 @@
     function FormService($http, $q) {
 
         var api = {
-            findAllFormsForUser: findAllFormsForUser,
+            getAllFormsForUser: getAllFormsForUser,
+            getFormById: getFormById,
             createFormForUser: createFormForUser,
             deleteFormById: deleteFormById,
             updateFormById: updateFormById,
@@ -16,9 +17,18 @@
 
         return api;
 
-        function findAllFormsForUser(userId) {
+        function getAllFormsForUser(userId) {
             var deferred = $q.defer();
             $http.get("/api/assignment/user/" + userId + "/form")
+                .success(function (response) {
+                    deferred.resolve(response);
+                });
+            return deferred.promise;
+        }
+
+        function getFormById(formId) {
+            var deferred = $q.defer();
+            $http.get("/api/assignment/form/" + formId)
                 .success(function (response) {
                     deferred.resolve(response);
                 });
@@ -52,7 +62,6 @@
             return deferred.promise;
         }
 
-
         function findFormByName(index, formName, forms) {
             for(var i in forms) {
                 if(forms[i].title === formName && (index != i)) {
@@ -61,7 +70,6 @@
             }
             return false;
         }
-
 
     }
 })();

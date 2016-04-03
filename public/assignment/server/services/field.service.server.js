@@ -1,70 +1,47 @@
-module.exports = function(app) {
+module.exports = function(app, FieldModel) {
 
-    var formModel = require("./../models/form.model.js")();
-
-    app.get("/api/assignment/form/:formId/field", getFieldsForForm);
-    app.get("/api/assignment/form/:formId/field/:fieldId", cloneFieldForForm);
-    app.post("/api/assignment/form/:formId/field", addFieldForForm);
-    app.post("/api/assignment/form/:formId", changeFieldOrder);
-    app.put("/api/assignment/form/:formId/field/:fieldId", updateFieldFromForm);
-    app.put("/api/assignment/form/:formId/field/:fieldId/option", createOptionForField);
+    app.post("/api/assignment/form/:formId/field", createFieldForForm);
     app.delete("/api/assignment/form/:formId/field/:fieldId", deleteFieldFromForm);
-    app.delete("/api/assignment/form/:formId/field/:fieldId/option/:optionId", deleteOptionForField);
+    app.put("/api/assignment/form/:formId/field/:fieldId", updateFieldForForm);
+    app.get("/api/assignment/form/:formId/field/:fieldId", cloneFieldForForm);
+    app.get("/api/assignment/form/:formId/field/:fieldId/order/:newOrder", changeFieldOrder);
 
 
-    function getFieldsForForm(req, res) {
-        var formId = req.params.formId;
-        var fields = formModel.getFieldsForForm(formId);
-        res.json(fields);
-    }
-
-    function addFieldForForm(req, res) {
-        var formId = req.params.formId;
-        var fields = formModel.addFieldForForm(formId, req.body);
-        res.json(fields);
+    function createFieldForForm(req, res) {
+        FieldModel.createFieldForForm(req.params.formId, req.body)
+            .then(function (response){
+                res.json(response);
+            });
     }
 
     function deleteFieldFromForm(req, res) {
-        var formId = req.params.formId;
-        var fieldId = req.params.fieldId;
-        var fields = formModel.deleteFieldFromForm(formId, fieldId);
-        res.json(fields);
+        FieldModel.deleteFieldFromForm(req.params.formId, req.params.fieldId)
+            .then(function (response) {
+                res.json(response);
+            });
     }
 
-    function updateFieldFromForm(req, res) {
-        var formId = req.params.formId;
-        var fieldId = req.params.fieldId;
-        var fields = formModel.updateFieldFromForm(formId, fieldId, req.body);
-        res.json(fields);
+    function updateFieldForForm(req, res) {
+        FieldModel.updateFieldForForm(req.params.formId, req.params.fieldId, req.body)
+            .then(function (response) {
+                res.json(response);
+            });
     }
 
     function cloneFieldForForm(req, res) {
-        var formId = req.params.formId;
-        var fieldId = req.params.fieldId;
-        var fields = formModel.cloneFieldForForm(formId, fieldId);
-        res.json(fields);
+        FieldModel.cloneFieldForForm(req.params.formId, req.params.fieldId)
+            .then(function (response) {
+                res.json(response);
+            });
     }
 
     function changeFieldOrder(req, res) {
-        var formId = req.params.formId;
-        var fields = formModel.changeFieldOrder(formId, req.body);
-        res.json(fields);
+        FieldModel.changeFieldOrder(req.params.formId, req.params.fieldId, req.params.newOrder)
+            .then(function (response) {
+                res.json(response);
+            });
     }
 
-    function createOptionForField(req, res) {
-        var formId = req.params.formId;
-        var fieldId = req.params.fieldId;
-        var options = formModel.createOptionForField(formId, fieldId);
-        res.json(options);
-    }
-
-    function deleteOptionForField(req, res) {
-        var formId = req.params.formId;
-        var fieldId = req.params.fieldId;
-        var optionIndex = req.params.optionId;
-        var options = formModel.deleteOptionForField(formId, fieldId, optionIndex);
-        res.json(options);
-    }
 
 };
 

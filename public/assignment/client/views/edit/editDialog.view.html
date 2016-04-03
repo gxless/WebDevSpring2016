@@ -4,7 +4,6 @@
     </div>
     <div class="col-xs-6 text-align-right editSec">
         <button ng-click="updateField(field._id, $index, true)" type="button" class="btn btn-success editIcon"><span class="glyphicon glyphicon-ok"></span></button>
-        <button ng-click="editCancel()" type="button" class="btn btn-cancel editIcon"><span class="glyphicon glyphicon-chevron-up"></span></button>
     </div>
 </div>
 
@@ -52,7 +51,7 @@
                         <label class="control-label">Value</label>
                     </div>
                     <div class="col-xs-2 noPadding">
-                        <button ng-click="addOption(field._id, $index)" class="btn addBtn"><span class="glyphicon glyphicon-plus"></span></button>
+                        <button ng-click="addOption($index)" class="btn addBtn"><span class="glyphicon glyphicon-plus"></span></button>
                     </div>
                 </div>
 
@@ -64,7 +63,7 @@
                         <input ng-blur="updateField(field._id, $parent.$index)" ng-model="option.value" class="form-control" placeholder="Value">
                     </div>
                     <div class="col-xs-2 deleteBtnPadding">
-                        <button ng-click="deleteOption(field._id, $parent.$index, $index, field.options)" class="btn deleteBtn"><span class="glyphicon glyphicon-remove"></span></button>
+                        <button ng-click="deleteOption($parent.$index, $index, field.options.length)" class="btn deleteBtn"><span class="glyphicon glyphicon-remove"></span></button>
                     </div>
                 </div>
             </div>
@@ -82,7 +81,7 @@
                         <label class="control-label">Value</label>
                     </div>
                     <div class="col-xs-2 noPadding">
-                        <button ng-click="addOption(field._id, $index)" class="btn addBtn"><span class="glyphicon glyphicon-plus"></span></button>
+                        <button ng-click="addOption($index)" class="btn addBtn"><span class="glyphicon glyphicon-plus"></span></button>
                     </div>
                 </div>
 
@@ -94,7 +93,7 @@
                         <input ng-blur="updateField(field._id, $parent.$index)" ng-model="option.value" class="form-control" placeholder="Value">
                     </div>
                     <div class="col-xs-2 deleteBtnPadding">
-                        <button ng-click="deleteOption(field._id, $parent.$index,  $index, field.options)" class="btn deleteBtn"><span class="glyphicon glyphicon-remove"></span></button>
+                        <button ng-click="deleteOption($parent.$index, $index, field.options.length)" class="btn deleteBtn"><span class="glyphicon glyphicon-remove"></span></button>
                     </div>
                 </div>
             </div>
@@ -111,7 +110,7 @@
                         <label class="control-label">Value</label>
                     </div>
                     <div class="col-xs-2 noPadding">
-                        <button ng-click="addOption(field._id, $index)" class="btn addBtn"><span class="glyphicon glyphicon-plus"></span></button>
+                        <button ng-click="addOption($index)" class="btn addBtn"><span class="glyphicon glyphicon-plus"></span></button>
                     </div>
                 </div>
 
@@ -123,7 +122,7 @@
                         <input ng-blur="updateField(field._id, $parent.$index)" ng-model="option.value" class="form-control" placeholder="Value">
                     </div>
                     <div class="col-xs-2 deleteBtnPadding">
-                        <button ng-click="deleteOption(field._id, $parent.$index, $index, field.options)" class="btn deleteBtn"><span class="glyphicon glyphicon-remove"></span></button>
+                        <button ng-click="deleteOption($parent.$index, $index, field.options.length)" class="btn deleteBtn"><span class="glyphicon glyphicon-remove"></span></button>
                     </div>
                 </div>
             </div>

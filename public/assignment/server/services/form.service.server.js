@@ -1,35 +1,45 @@
-module.exports = function(app) {
+module.exports = function(app, FormModel) {
 
-    var formModel = require("./../models/form.model.js")();
-
-    app.get("/api/assignment/user/:userId/form", findAllFormsForUser);
-    //app.get("/api/assignment/form/:formId", findFormById);
+    app.get("/api/assignment/user/:userId/form", getAllFormsForUser);
+    app.get("/api/assignment/form/:formId", getFormById);
     app.delete("/api/assignment/form/:formId", deleteFormById);
     app.post("/api/assignment/user/:userId/form", createFormForUser);
     app.put("/api/assignment/form/:formId", updateFormById);
 
-    function findAllFormsForUser(req, res) {
-        var userId = req.params.userId;
-        var forms = formModel.findAllFormsForUser(userId);
-        res.json(forms);
+
+    function getAllFormsForUser(req, res) {
+        FormModel.getAllFormsForUser(req.params.userId)
+            .then(function (response){
+                res.json(response);
+            });
+    }
+
+    function getFormById(req, res) {
+        FormModel.getFormById(req.params.formId)
+            .then(function (response) {
+                res.json(response);
+            });
     }
 
     function createFormForUser(req, res) {
-        var userId = req.params.userId;
-        var forms = formModel.createFormForUser(userId, req.body);
-        res.json(forms);
+        FormModel.createFormForUser(req.body)
+            .then(function (response) {
+                res.json(response);
+            });
     }
 
     function updateFormById(req, res) {
-        var formId = req.params.formId;
-        var form = formModel.updateFormById(formId, req.body);
-        res.json(form);
+        FormModel.updateFormById(req.body)
+            .then(function (response) {
+                res.json(response);
+            });
     }
 
     function deleteFormById(req, res) {
-        var formId = req.params.formId;
-        var forms = formModel.deleteFormById(formId);
-        res.json(forms);
+        FormModel.deleteFormById(req.params.formId)
+            .then(function (response) {
+                res.json(response);
+            });
     }
 };
 
