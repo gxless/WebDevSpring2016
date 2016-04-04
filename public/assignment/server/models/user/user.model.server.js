@@ -42,7 +42,6 @@ module.exports = function (mongoose, q) {
     function register(newUser) {
         var deferred = q.defer();
         newUser = new UserModel(newUser);
-
         newUser.save(function (err, results) {
             deferred.resolve(results);
         });
@@ -51,23 +50,14 @@ module.exports = function (mongoose, q) {
 
     function updateUser(userId, user) {
         var deferred = q.defer();
+        var userId = mongoose.Types.ObjectId(userId);
+        delete user._id;
         UserModel
-            .findById(userId, function (err, doc) {
+            .findOneAndUpdate({_id: userId}, user, {new: true}, function (err, doc) {
                 if (err) {
                     deferred.reject(err);
                 } else {
-                    console.log(user);
-                    doc = new UserModel(user);
-                    doc.isNew = false;
-                    console.log(doc);
-                    doc.save(function (err) {
-                        if(err) {
-                            deferred.reject(err);
-                        } else {
-                            deferred.resolve(doc);
-                        }
-
-                    });
+                    deferred.resolve(doc);
                 }
             });
         return deferred.promise;
@@ -77,10 +67,13 @@ module.exports = function (mongoose, q) {
         var deferred = q.defer();
         UserModel.findOne({username: credential.username, password: credential.password},
             function (err, doc) {
-                deferred.resolve(doc);
+                if (err) {
+                    deferred.reject(err);
+                } else {
+                    deferred.resolve(doc);
+                }
             });
         return deferred.promise;
-
     }
 
 };

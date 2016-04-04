@@ -3,7 +3,7 @@
         <p class="editTitle"><b>Edit Here</b></p>
     </div>
     <div class="col-xs-6 text-align-right editSec">
-        <button ng-click="updateField(field._id, $index, true)" type="button" class="btn btn-success editIcon"><span class="glyphicon glyphicon-ok"></span></button>
+        <button ng-click="updateField(field._id, $index)" type="button" class="btn btn-success editIcon"><span class="glyphicon glyphicon-ok"></span></button>
     </div>
 </div>
 
@@ -57,10 +57,10 @@
 
                 <div ng-repeat="option in field.options" class="row optionRow">
                     <div class="col-xs-5">
-                        <input ng-blur="updateField(field._id, $parent.$index)" ng-model="option.label" class="form-control" placeholder="Label">
+                        <input ng-model="option.label" class="form-control" placeholder="Label">
                     </div>
                     <div class="col-xs-5">
-                        <input ng-blur="updateField(field._id, $parent.$index)" ng-model="option.value" class="form-control" placeholder="Value">
+                        <input ng-model="option.value" class="form-control" placeholder="Value">
                     </div>
                     <div class="col-xs-2 deleteBtnPadding">
                         <button ng-click="deleteOption($parent.$index, $index, field.options.length)" class="btn deleteBtn"><span class="glyphicon glyphicon-remove"></span></button>
@@ -87,10 +87,10 @@
 
                 <div ng-repeat="option in field.options" class="row optionRow">
                     <div class="col-xs-5">
-                        <input  ng-blur="updateField(field._id, $parent.$index)" ng-model="option.label" class="form-control" placeholder="Label">
+                        <input ng-model="option.label" class="form-control" placeholder="Label">
                     </div>
                     <div class="col-xs-5">
-                        <input ng-blur="updateField(field._id, $parent.$index)" ng-model="option.value" class="form-control" placeholder="Value">
+                        <input ng-model="option.value" class="form-control" placeholder="Value">
                     </div>
                     <div class="col-xs-2 deleteBtnPadding">
                         <button ng-click="deleteOption($parent.$index, $index, field.options.length)" class="btn deleteBtn"><span class="glyphicon glyphicon-remove"></span></button>
@@ -116,10 +116,10 @@
 
                 <div ng-repeat="option in field.options" class="row optionRow">
                     <div class="col-xs-5">
-                        <input ng-blur="updateField(field._id, $parent.$index)" ng-model="option.label" class="form-control" placeholder="Label">
+                        <input ng-model="option.label" class="form-control" placeholder="Label">
                     </div>
                     <div class="col-xs-5">
-                        <input ng-blur="updateField(field._id, $parent.$index)" ng-model="option.value" class="form-control" placeholder="Value">
+                        <input ng-model="option.value" class="form-control" placeholder="Value">
                     </div>
                     <div class="col-xs-2 deleteBtnPadding">
                         <button ng-click="deleteOption($parent.$index, $index, field.options.length)" class="btn deleteBtn"><span class="glyphicon glyphicon-remove"></span></button>

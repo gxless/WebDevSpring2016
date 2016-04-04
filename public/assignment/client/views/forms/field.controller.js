@@ -32,13 +32,11 @@
             $scope.fieldMessage = "No form is selected"
         } else {
             $scope.fieldMessage = null;
+            FormService.getFormById(formId)
+                .then(function (response) {
+                    $scope.model = response;
+                });
         }
-
-        FormService.getFormById(formId)
-            .then(function (response) {
-                $scope.model = response;
-            });
-
 
         function addField(fieldType) {
             $scope.hasError = false;
@@ -65,16 +63,14 @@
                 });
         }
 
-        function updateField(fieldId, index, collapse) {
+        function updateField(fieldId, index) {
             $scope.hasError = false;
             if($scope.model.fields[index].label) {
                 var field = $scope.model.fields[index];
                 FieldService.updateField(formId, fieldId, field)
                     .then(function (response) {
                         $scope.model.fields[index] = response;
-                        if(collapse === true) {
-                            $scope.editShownIndex = -1;
-                        }
+                        $scope.editShownIndex = -1;
                     });
             } else {
                 $scope.hasError = true;

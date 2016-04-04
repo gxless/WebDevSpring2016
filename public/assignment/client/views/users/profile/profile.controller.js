@@ -17,10 +17,10 @@
         function update(currentUser) {
             if($scope.profileForm.$valid) {
                 var userId = UserService.getCurrentUser()._id;
-
                 UserService.updateUserById(userId, currentUser)
                     .then(function (response) {
                         $scope.currentUser = response;
+                        UserService.setCurrentUser($scope.currentUser);
                     });
                 $scope.updateMessage = "Update successfully";
             } else {

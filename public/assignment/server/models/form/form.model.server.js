@@ -17,8 +17,12 @@ module.exports = function (mongoose, q) {
     function getAllFormsForUser(userId) {
         var deferred = q.defer();
         FormModel
-            .find({userId: userId}, function (err, results) {
-                deferred.resolve(results);
+            .find({userId: mongoose.Types.ObjectId(userId)}, function (err, docs) {
+                if(err) {
+                    deferred.reject(err);
+                } else {
+                    deferred.resolve(docs);
+                }
             });
         return deferred.promise;
     }
@@ -26,8 +30,12 @@ module.exports = function (mongoose, q) {
     function getFormById(formId) {
         var deferred = q.defer();
         FormModel
-            .findById(formId, function (err, results){
-            deferred.resolve(results);
+            .findById(mongoose.Types.ObjectId(formId), function (err, doc){
+                if(err) {
+                    deferred.reject(err);
+                } else {
+                    deferred.resolve(doc);
+                }
         });
         return deferred.promise;
     }
@@ -48,7 +56,8 @@ module.exports = function (mongoose, q) {
 
     function updateFormById(form) {
         var deferred = q.defer();
-        FormModel.findById(form._id, function (err, doc) {
+        var formId = mongoose.Types.ObjectId(form._id);
+        FormModel.findById(formId, function (err, doc) {
             if (err) {
                 deferred.reject(err);
             } else {
@@ -68,15 +77,11 @@ module.exports = function (mongoose, q) {
 
     function deleteFormById(formId) {
         var deferred = q.defer();
-        FormModel.remove({_id : formId}, function (err, status) {
+        FormModel.remove({_id : mongoose.Types.ObjectId(formId)}, function (err) {
             if(err) {
                 deferred.reject(err);
             } else {
-                if(status.result.ok == 1) {
-                    deferred.resolve(true);
-                } else {
-                    deferred.resolve(false);
-                }
+                deferred.resolve(true);
             }
         });
         return deferred.promise;
