@@ -3,7 +3,7 @@ module.exports = function(app, FieldModel) {
     app.post("/api/assignment/form/:formId/field", createFieldForForm);
     app.delete("/api/assignment/form/:formId/field/:fieldId", deleteFieldFromForm);
     app.put("/api/assignment/form/:formId/field/:fieldId", updateFieldForForm);
-    app.get("/api/assignment/form/:formId/field/:fieldId", cloneFieldForForm);
+    app.get("/api/assignment/form/:formId/field/:fieldId/position/:newPosition", cloneFieldForForm);
     app.get("/api/assignment/form/:formId/field/:fieldId/order/:newOrder", changeFieldOrder);
 
 
@@ -29,7 +29,7 @@ module.exports = function(app, FieldModel) {
     }
 
     function cloneFieldForForm(req, res) {
-        FieldModel.cloneFieldForForm(req.params.formId, req.params.fieldId)
+        FieldModel.cloneFieldForForm(req.params.formId, req.params.fieldId, req.params.newPosition)
             .then(function (response) {
                 res.json(response);
             });

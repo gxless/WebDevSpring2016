@@ -6,7 +6,7 @@ var q = require("q");
 
 var ipaddress = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 var port = process.env.OPENSHIFT_NODEJS_PORT || 3000;
-var dbConnectionString = 'mongodb://localhost/formbuilder';
+var dbConnectionString = 'mongodb://localhost/formmaker';
 
 //connect to mongodb on openshift
 if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {

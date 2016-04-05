@@ -49,9 +49,9 @@
             return deferred.promise;
         }
 
-        function cloneFieldForForm(formId, fieldId) {
+        function cloneFieldForForm(formId, fieldId, newPosition) {
             var deferred = $q.defer();
-            $http.get("/api/assignment/form/" + formId + "/field/" + fieldId)
+            $http.get("/api/assignment/form/" + formId + "/field/" + fieldId + "/position/" + newPosition)
                 .success(function (response) {
                     deferred.resolve(response);
                 });

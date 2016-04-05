@@ -81,10 +81,8 @@
         function removeField(fieldId, index) {
             $scope.hasError = false;
             FieldService.deleteFieldFromForm(formId, fieldId)
-                .then(function (status) {
-                    if(status.ok == 1) {
-                        $scope.model.fields.splice(index, 1);
-                    }
+                .then(function (response) {
+                    $scope.model.fields = response;
                 });
             if(index < $scope.editShownIndex) {
                 $scope.editShownIndex--;
@@ -93,11 +91,11 @@
             }
         }
 
-        function cloneField(fieldId) {
+        function cloneField(fieldId, newPosition) {
             $scope.hasError = false;
-            FieldService.cloneFieldForForm(formId, fieldId)
+            FieldService.cloneFieldForForm(formId, fieldId, newPosition)
                 .then(function (response) {
-                    $scope.model.fields.push(response);
+                    $scope.model.fields = response;
                 });
 
         }

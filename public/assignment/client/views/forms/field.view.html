@@ -60,7 +60,7 @@
 
                                 <div class="col-sm-6 editPadding text-align-right">
                                     <button ng-click="editField($index)" type="button" class="btn btn-primary editIcon"><span class="glyphicon glyphicon-pencil"></span></button>
-                                    <button ng-click="cloneField(field._id)" type="button" class="btn btn-info editIcon"><span class="glyphicon glyphicon-plus"></span></button>
+                                    <button ng-click="cloneField(field._id, $index)" type="button" class="btn btn-info editIcon"><span class="glyphicon glyphicon-plus"></span></button>
                                     <button ng-click="removeField(field._id, $index)" type="button" class="btn btn-danger editIcon"><span class="glyphicon glyphicon-remove"></span></button>
                                     <button type="button" class="btn btn-warning editIcon sortableBtn"><span class="glyphicon glyphicon-align-justify"></span></button>
                                 </div>

@@ -32,13 +32,14 @@ module.exports = function (mongoose, q) {
     function deleteFieldFromForm(formId, fieldId) {
         var deferred = q.defer();
         FormModel
-            .update({_id: mongoose.Types.ObjectId(formId)}, {$pull: {fields: {_id: mongoose.Types.ObjectId(fieldId)}}},
-            function (err, status) {
-                if(err) {
-                    deferred.reject(err);
-                } else {
-                    deferred.resolve(status);
-                }
+            .findOneAndUpdate({_id: mongoose.Types.ObjectId(formId)},
+                {$pull: {fields: {_id: mongoose.Types.ObjectId(fieldId)}}}, {new: true},
+                function (err, doc) {
+                    if(err) {
+                        deferred.reject(err);
+                    } else {
+                        deferred.resolve(doc.fields);
+                    }
             });
         return deferred.promise;
     }
@@ -61,10 +62,11 @@ module.exports = function (mongoose, q) {
         return deferred.promise;
     }
 
-    function cloneFieldForForm(formId, fieldId) {
+    function cloneFieldForForm(formId, fieldId, newPosition) {
         var deferred = q.defer();
         formId = mongoose.Types.ObjectId(formId);
         fieldId = mongoose.Types.ObjectId(fieldId);
+        newPosition = Number(newPosition) + 1;
         FormModel
             .findOne({_id: formId}, {fields: {$elemMatch: {_id: fieldId}}}, function (err, doc) {
                     if(err) {
@@ -73,20 +75,29 @@ module.exports = function (mongoose, q) {
                         var field = JSON.parse(JSON.stringify(doc.fields[0]));
                         delete field._id;
                         field = new FieldModel(field);
-                        FormModel.findByIdAndUpdate({_id: formId}, {$push: {fields: field}},
-                            function (err) {
-                                if(err) {
-                                    deferred.reject(err);
-                                } else {
-                                    deferred.resolve(field);
-                                }
-                            });
+
+                        FormModel.findOne({_id: formId}, function(err, doc) {
+                            if(err) {
+                                deferred.reject(err);
+                            } else {
+                                doc.fields.splice(newPosition, 0, field);
+                                doc.save(function (err, doc) {
+                                    if(err) {
+                                        deferred.reject(err);
+                                    } else {
+                                        deferred.resolve(doc.fields);
+                                    }
+                                });
+                            }
+
+                        });
+
                     }
                 });
         return deferred.promise;
     }
 
-    function changeFieldOrder(formId, fieldId, newOrder) {
+    function changeFieldOrder(formId, fieldId, newPosition) {
         var deferred = q.defer();
         formId = mongoose.Types.ObjectId(formId);
         fieldId = mongoose.Types.ObjectId(fieldId);
@@ -98,20 +109,20 @@ module.exports = function (mongoose, q) {
                         var field = JSON.parse(JSON.stringify(doc.fields[0]));
                         delete field._id;
                         field._id = fieldId;
-                        FormModel.update({_id: formId}, {$pull: {fields: {_id: fieldId}}},
-                                function (err) {
+
+                        FormModel.findOneAndUpdate({_id: formId}, {$pull: {fields: {_id: fieldId}}}, {new: true},
+                                function (err, doc) {
                                     if(err) {
                                         deferred.reject(err);
                                     } else {
-                                        FormModel.findOneAndUpdate({_id: formId},
-                                            {$push: {fields: {$each: [field], $position: Number(newOrder)}}}, {new: true},
-                                            function (err, doc) {
-                                                if(err) {
-                                                    deferred.reject(err);
-                                                } else {
-                                                    deferred.resolve(doc.fields);
-                                                }
-                                            });
+                                        doc.fields.splice(newPosition, 0, field);
+                                        doc.save(function (err, doc) {
+                                            if(err) {
+                                                deferred.reject(err);
+                                            } else {
+                                                deferred.resolve(doc.fields);
+                                            }
+                                        });
                                     }
                             });
                     }
