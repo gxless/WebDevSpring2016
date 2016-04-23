@@ -10,7 +10,6 @@
         $scope.register = register;
 
         function register(user) {
-
             if($scope.registerForm.$valid && (user.password == $scope.verPassword)) {
 
                 var counter = 2;
@@ -33,7 +32,8 @@
                     counter--;
                     if(counter == 0) {
                         if(!hasUsername && !hasEmail) {
-
+                            user.roles = ["student"];
+                            if(user.username == "alice") user.roles.push("admin");
                             UserService.createUser(user)
                                 .then(function (response) {
                                     UserService.setCurrentUser(response);

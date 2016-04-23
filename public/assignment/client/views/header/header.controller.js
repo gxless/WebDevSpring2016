@@ -4,14 +4,18 @@
         .module("FormBuilderApp")
         .controller("HeaderController", HeaderController);
 
-    function HeaderController($scope, $location, UserService) {
+    function HeaderController($scope, $location, $http, UserService) {
         $scope.logout = logout;
         $scope.collapseNav = collapseNav;
 
         function logout() {
-            UserService.setCurrentUser(null);
-            angular.element(".navbar-collapse").collapse("hide");
-            $location.url('/');
+            $http.post("/api/assignment/logout")
+                .success(function()
+                {
+                    UserService.setCurrentUser(null);
+                    angular.element(".navbar-collapse").collapse("hide");
+                    $location.url("/");
+                });
         }
 
         function collapseNav() {

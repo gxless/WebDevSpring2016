@@ -8,10 +8,6 @@
 
         var currentUser = UserService.getCurrentUser();
 
-        if(currentUser == null) {
-            $location.url("/home");
-        }
-
         $scope.fieldType = "TEXT";
         $scope.editShownIndex = -1;
         $scope.fieldMessage = null;

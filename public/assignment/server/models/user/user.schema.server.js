@@ -1,4 +1,4 @@
-module.exports = function (mongoose) {
+module.exports = function (mongoose, bcrypt) {
 
     var UserSchema = mongoose.Schema({
         username: String,
@@ -6,8 +6,13 @@ module.exports = function (mongoose) {
         firstName: String,
         lastName: String,
         email: String,
-        roles: [String]
+        roles: [String],
+        facebook: {
+            id: String,
+            token: String
+        }
     }, {collection: "user"});
+
 
     return UserSchema;
 };

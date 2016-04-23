@@ -1,56 +1,63 @@
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
     <h1 class="page-header">Admin</h1>
+    <div ng-show="UserMessage" class="alert alert-danger">{{UserMessage}}</div>
+
     <h2 >Users</h2>
     <div class="table-responsive">
         <table id="admin-table" class="table table-striped">
             <thead>
             <tr>
-                <th><button class="sorting-icon" href="#"><span class="glyphicon glyphicon-triangle-bottom"></span></button> Username</th>
-                <th><button class="sorting-icon" href="#"><span class="glyphicon glyphicon-triangle-bottom"></span></button> Password</th>
-                <th><button class="sorting-icon" href="#"><span class="glyphicon glyphicon-triangle-bottom"></span></button> Role</th>
-                <th><button class="sorting-icon" href="#"><span class="glyphicon glyphicon-triangle-bottom"></span></button> Action</th>
+                <th ng-click="sort('username')">Username
+                    <span ng-show="sortType=='username'&&!sortReverse" class="sorting-icon glyphicon glyphicon-triangle-top"></span>
+                    <span ng-show="sortType=='username'&&sortReverse" class="sorting-icon glyphicon glyphicon-triangle-bottom"></span>
+                </th>
+                <th>Password</th>
+                <th ng-click="sort('firstName')">First Name
+                    <span ng-show="sortType=='firstName'&&!sortReverse" class="sorting-icon glyphicon glyphicon-triangle-top"></span>
+                    <span ng-show="sortType=='firstName'&&sortReverse" class="sorting-icon glyphicon glyphicon-triangle-bottom"></span>
+                </th>
+                <th ng-click="sort('lastName')">Last Name
+                    <span ng-show="sortType=='lastName'&&!sortReverse" class="sorting-icon glyphicon glyphicon-triangle-top"></span>
+                    <span ng-show="sortType=='lastName'&&sortReverse" class="sorting-icon glyphicon glyphicon-triangle-bottom"></span>
+                </th>
+                <th>Roles</th>
+                <th>Actions</th>
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td><input type="text" class="form-control" id="inputAdminUsername" placeholder="username"></td>
-                <td><input type="text" class="form-control" id="inputAdminPassword" placeholder="password"></td>
-                <td><input type="text" class="form-control" id="inputAdminRole" placeholder="role1, role2"></td>
+            <tr ng-form name="form">
+                <td><input ng-model="editUser.username" type="text" class="form-control" name="username" placeholder="username" required></td>
+                <td><input ng-model="editUser.password" type="text" class="form-control" placeholder="password"></td>
+                <td><input ng-model="editUser.firstName" type="text" class="form-control" placeholder="first name"></td>
+                <td><input ng-model="editUser.lastName" type="text" class="form-control" placeholder="last name"></td>
+                <td><input ng-model="editUser.roles" type="text" class="form-control" name="roles" placeholder="role1, role2" required></td>
                 <td>
-                    <button type="button" class="btn btn-info editIcon"><span class="glyphicon glyphicon-plus"></span></button>
-                    <button type="button" class="btn btn-success editIcon"><span class="glyphicon glyphicon-ok"></span></button>
+                    <button ng-click="addUser(editUser)" ng-disabled="selectedIndex!=-1" type="button" class="btn btn-info editIcon"><span class="glyphicon glyphicon-plus"></span></button>
+                    <button ng-click="updateUser()" ng-disabled="form.username.$invalid || form.roles.$invalid || selectedIndex==-1" type="button" class="btn btn-success editIcon"><span class="glyphicon glyphicon-ok"></span></button>
                 </td>
             </tr>
-            <tr>
-                <td>alice</td>
+            <tr ng-repeat="user in users" ng-class="{'success':$index == selectedIndex}">
+                <td>{{user.username}}</td>
                 <td></td>
-                <td>student</td>
+                <td>{{user.firstName}}</td>
+                <td>{{user.lastName}}</td>
                 <td>
-                    <button type="button" class="btn btn-danger editIcon"><span class="glyphicon glyphicon-remove"></span></button>
-                    <button type="button" class="btn btn-primary editIcon"><span class="glyphicon glyphicon-pencil"></span></button>
+                    <span ng-repeat="role in user.roles">{{role}}{{$last ? '' : ', '}}</span>
+                </td>
+                <td>
+                    <button ng-click="deleteUser(user._id, $index)" type="button" class="btn btn-danger editIcon"><span class="glyphicon glyphicon-remove"></span></button>
+                    <button ng-click="selectUser($index)" type="button" class="btn btn-primary editIcon"><span class="glyphicon glyphicon-pencil"></span></button>
                 </td>
             </tr>
-            <tr>
-                <td>bob</td>
-                <td></td>
-                <td>faculty | admin</td>
-                <td>
-                    <button type="button" class="btn btn-danger editIcon"><span class="glyphicon glyphicon-remove"></span></button>
-                    <button type="button" class="btn btn-primary editIcon"><span class="glyphicon glyphicon-pencil"></span></button>
-                </td>
-            </tr>
-            <tr>
-                <td>charlie</td>
-                <td></td>
-                <td></td>
-                <td>
-                    <button type="button" class="btn btn-danger editIcon"><span class="glyphicon glyphicon-remove"></span></button>
-                    <button type="button" class="btn btn-primary editIcon"><span class="glyphicon glyphicon-pencil"></span></button>
-                </td>
-            </tr>
-
             </tbody>
         </table>
     </div>
+    <br />
+    <p class="alert alert-info"><strong>Tips:</strong><br />
+        The roles can be set to <strong>student</strong>, <strong>faculty</strong> or <strong>admin</strong>. If the
+        user has multiple roles, please use comma to seperate each role, e.g. <strong>faculty, admin</strong>.
+        <br/>
+        If the password is set to empty, the password is still the original one.
+    </p>
 
 </div>

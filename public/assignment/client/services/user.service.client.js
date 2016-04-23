@@ -10,10 +10,13 @@
             findUserByUsername : findUserByUsername,
             findUserByEmail : findUserByEmail,
             findUserByCredentials : findUserByCredentials,
-            findAllUsers : findAllUsers,
             createUser : createUser,
-            deleteUserById : deleteUserById,
             updateUserById : updateUserById,
+            //admin functions
+            findAllUsers : findAllUsers,
+            createUserByAdmin: createUserByAdmin,
+            deleteUserByAdmin: deleteUserByAdmin,
+            updateUserByAdmin: updateUserByAdmin,
             setCurrentUser : setCurrentUser,
             getCurrentUser : getCurrentUser
         };
@@ -45,17 +48,7 @@
                 password: password
             };
 
-            $http.post("/api/assignment/user/" + username, credentials)
-                .success(function (response) {
-                    deferred.resolve(response);
-                });
-
-            return deferred.promise;
-        }
-
-        function findAllUsers() {
-            var deferred = $q.defer();
-            $http.get('/api/assignment/user')
+            $http.post("/api/assignment/login", credentials)
                 .success(function (response) {
                     deferred.resolve(response);
                 });
@@ -65,17 +58,7 @@
 
         function createUser(user) {
             var deferred = $q.defer();
-            $http.post('/api/assignment/user', user)
-                .success(function (response) {
-                    deferred.resolve(response);
-                });
-
-            return deferred.promise;
-        }
-
-        function deleteUserById(userId) {
-            var deferred = $q.defer();
-            $http.delete('/api/assignment/user/' + userId)
+            $http.post('/api/assignment/register', user)
                 .success(function (response) {
                     deferred.resolve(response);
                 });
@@ -92,6 +75,48 @@
 
             return deferred.promise;
         }
+
+        //admin functions
+        function findAllUsers() {
+            var deferred = $q.defer();
+            $http.get('/api/assignment/admin/user')
+                .success(function (response) {
+                    deferred.resolve(response);
+                });
+
+            return deferred.promise;
+        }
+
+        function createUserByAdmin(user) {
+            var deferred = $q.defer();
+            $http.post('/api/assignment/admin/user', user)
+                .success(function (response) {
+                    deferred.resolve(response);
+                });
+
+            return deferred.promise;
+        }
+
+        function deleteUserByAdmin(userId) {
+            var deferred = $q.defer();
+            $http.delete('/api/assignment/admin/user/' + userId)
+                .success(function (response) {
+                    deferred.resolve(response);
+                });
+
+            return deferred.promise;
+        }
+
+        function updateUserByAdmin(userId, user) {
+            var deferred = $q.defer();
+            $http.put('/api/assignment/user/' + userId, user)
+                .success(function (response) {
+                    deferred.resolve(response);
+                });
+
+            return deferred.promise;
+        }
+
 
         function setCurrentUser(user) {
             $rootScope.currentUser = user;

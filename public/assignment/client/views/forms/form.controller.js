@@ -8,14 +8,10 @@
 
         var currentUser = UserService.getCurrentUser();
 
-        if(currentUser == null) {
-            $location.url("/home");
-        } else {
-            FormService.getAllFormsForUser(currentUser._id)
-                .then(function (response) {
-                    $scope.forms = response;
-                });
-        }
+        FormService.getAllFormsForUser(currentUser._id)
+            .then(function (response) {
+                $scope.forms = response;
+            });
 
         var formName = null;
         $scope.selectedIndex = -1;
