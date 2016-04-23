@@ -33,7 +33,7 @@
                     if(counter == 0) {
                         if(!hasUsername && !hasEmail) {
                             user.roles = ["student"];
-                            if(user.username == "alice") user.roles.push("admin");
+                            if(user.username == "admin") user.roles.push("admin");
                             UserService.createUser(user)
                                 .then(function (response) {
                                     UserService.setCurrentUser(response);
